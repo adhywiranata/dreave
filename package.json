@@ -1,19 +1,32 @@
 {
-  "name": "dreave",
+  "name": "react-tutorial-mern",
   "version": "1.0.0",
-  "description": "pave your dream with dreave",
-  "main": "index.js",
+  "description": "React Tutorial using MERN stack",
+  "main": "webapp.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adhywiranata/dreave.git"
+    "url": "git+https://github.com/vasansr/react-tutorial-mern.git"
   },
-  "author": "Adhy Wiranata",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "tutorial",
+    "MERN"
+  ],
+  "author": "Vasan Subramanian",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/adhywiranata/dreave/issues"
+    "url": "https://github.com/vasansr/react-tutorial-mern/issues"
   },
-  "homepage": "https://github.com/adhywiranata/dreave#readme"
+  "homepage": "https://github.com/vasansr/react-tutorial-mern#readme",
+  "dependencies": {
+    "babel-preset-react": "^6.3.13",
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3"
+  },
+  "devDependencies": {
+    "semantic-ui": "^2.2.1"
+  }
 }
