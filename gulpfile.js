@@ -1,8 +1,35 @@
-var
-  gulp  = require('gulp'),
-  watch = require('./semantic/tasks/watch'),
-  build = require('./semantic/tasks/build')
-;
-// import task with a custom task name
-gulp.task('watch ui', watch);
-gulp.task('build ui', build);
+var gulp = require('gulp');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var watchify = require('watchify');
+
+gulp.task('bundle', function() {
+  return browserify('src/App.js')
+    .transform('babelify', {presets: 'react'})
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('public/'));
+});
+
+gulp.task('watch', function() {
+
+  var b = browserify({
+    entries: ['src/App.js'],
+    cache: {}, packageCache: {},
+    plugin: ['watchify']
+  });
+
+  b.on('update', makeBundle);
+
+  function makeBundle() {
+    b.transform('babelify', {presets: 'react'})
+      .bundle()
+      .pipe(source('bundle.js'))
+      .pipe(gulp.dest('public/'));
+  }
+
+  // we have to call bundle once to kick it off.
+  makeBundle();
+
+  return b;
+});
