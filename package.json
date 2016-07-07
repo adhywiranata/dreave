@@ -24,7 +24,9 @@
   "dependencies": {
     "babel-preset-react": "^6.3.13",
     "body-parser": "^1.14.2",
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "history": "^3.0.0",
+    "react-router": "^2.5.2"
   },
   "devDependencies": {
     "babelify": "^7.3.0",

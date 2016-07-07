@@ -4,17 +4,17 @@ var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 
 gulp.task('bundle', function() {
-  return browserify('src/App.js')
+  return browserify('react_components/App0.js')
     .transform('babelify', {presets: 'react'})
     .bundle()
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest('public/'));
+    .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('watch', function() {
 
   var b = browserify({
-    entries: ['src/App.js'],
+    entries: ['react_components/App.js'],
     cache: {}, packageCache: {},
     plugin: ['watchify']
   });
@@ -24,8 +24,13 @@ gulp.task('watch', function() {
   function makeBundle() {
     b.transform('babelify', {presets: 'react'})
       .bundle()
+      .on('error', function(err) {
+        console.error(err.message);
+        console.error(err.codeFrame);
+      })
       .pipe(source('bundle.js'))
-      .pipe(gulp.dest('public/'));
+      .pipe(gulp.dest('public/js'));
+    console.log("Bundle updated, success");
   }
 
   // we have to call bundle once to kick it off.
@@ -33,3 +38,5 @@ gulp.task('watch', function() {
 
   return b;
 });
+
+gulp.task('default', ['watch']);

@@ -8,10 +8,16 @@ var db;
 app.use(express.static('static'));
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/app', express.static(__dirname + '/views'));
+app.use('/trainings', express.static(__dirname + '/views/pages/trainings.html'));
 
 //GET Requests
 app.get('/api/notes', function(req, res) {
-  db.collection("notes").find().toArray(function(err, docs) {
+  var filter = {};
+  if (req.query.title){
+    filter.title = new RegExp(req.query.title, "i");
+    //filter.title = /+ req.query.title +/i; //LIKE QUERY in Mongo: /STRING/ for like, /i for case insensitive
+  }
+  db.collection("notes").find(filter).toArray(function(err, docs) {
     res.json(docs);
   });
 });
