@@ -1,8 +1,14 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React, { Component, PropTypes } from 'react';
+import { render } from 'react-dom';
 
-var AddForm = React.createClass({
-  render: function(){
+class AddForm extends Component {
+
+  constructor(props){
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  render(){
     console.log("Rendering LifeNotesForm");
     return (
       <div className="ui form p-20 form-block">
@@ -20,8 +26,9 @@ var AddForm = React.createClass({
         </form>
       </div>
     )
-  },
-  handleSubmit: function(e){
+  }
+
+  handleSubmit(e){
     e.preventDefault();
     console.log("add note form submitted");
     var form = document.forms.addNoteForm;
@@ -35,6 +42,6 @@ var AddForm = React.createClass({
     form.title.value        = "";
     form.description.value  = "";
   }
-});
+}
 
-module.exports = AddForm;
+export default AddForm;

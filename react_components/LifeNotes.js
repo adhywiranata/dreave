@@ -1,33 +1,41 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var $ = require('jquery');
+import React, { Component, PropTypes } from 'react';
+import ReactDOM, { render } from 'react-dom';
 
-var SectionHeader = require('./SectionHeader');
-var AddForm       = require('./AddForm');
-var FilterForm    = require('./FilterForm');
-var NotesList     = require('./NotesList');
+import $ from 'jquery';
 
-var LifeNotes = React.createClass({
-  getInitialState: function(){
-    return {
+import SectionHeader from './SectionHeader';
+import AddForm from './AddForm';
+import FilterForm from './FilterForm';
+import NotesList from './NotesList';
+
+class LifeNotes extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
       notes: []
     };
-  },
-  render: function(){
-    console.log("Rendering LifeNotes");
+    this.loadData = this.loadData.bind(this);
+    this.addNote = this.addNote.bind(this);
+    this.updateNote = this.updateNote.bind(this);
+    this.deleteNote = this.deleteNote.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  render(){
     return (
       <div>
         <SectionHeader />
         <AddForm addNote={this.addNote} />
-        <FilterForm changeHandler={this.loadData} initFilter={this.props.location.query}/>
+        <FilterForm changeHandler={this.loadData} />
         <NotesList notes={this.state.notes} />
       </div>
-    )
-  },
-  componentDidMount: function(){
-    this.loadData({});
-  },
-  loadData: function(filter){
+    );
+  }
+
+  loadData(filter){
     $.ajax({
       url: '/api/notes',
       dataType: 'json',
@@ -40,8 +48,9 @@ var LifeNotes = React.createClass({
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
-  },
-  addNote: function(note){
+  }
+
+  addNote(note){
     console.log("adding a new note: ", note);
     $.ajax({
       type: 'POST',
@@ -60,13 +69,15 @@ var LifeNotes = React.createClass({
         console.log("Error adding note:", err);
       }
     });
-  },
-  updateNote: function(){
+  }
 
-  },
-  deleteNote: function(){
+  updateNote(){
 
   }
-});
 
-module.exports = LifeNotes;
+  deleteNote(){
+
+  }
+}
+
+export default LifeNotes;

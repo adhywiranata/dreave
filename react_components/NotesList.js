@@ -1,8 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React, {Component} from 'react';
+import { render } from 'react-dom';
 
-var NoteRow = React.createClass({
-  render: function(){
+class NoteRow extends Component {
+  render(){
     console.log("Rendering Note:", this.props.note);
     return (
       <div className="card">
@@ -15,15 +15,15 @@ var NoteRow = React.createClass({
         </div>
         <div className="extra content">
           <i className="eye icon"></i>
-          121 Reads
+          123 Reads
         </div>
       </div>
     )
   }
-});
+}
 
-var NotesList = React.createClass({
-  render: function(){
+class NotesList extends Component {
+  render(){
     console.log("Rendering NotesList, num of notes: ", this.props.notes.length);
     var noteRows = this.props.notes.map(function(note) {
       return <NoteRow key={note._id} note={note} />
@@ -34,6 +34,6 @@ var NotesList = React.createClass({
       </div>
     )
   }
-});
+}
 
 module.exports = NotesList;

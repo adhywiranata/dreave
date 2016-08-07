@@ -1,11 +1,13 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React, {Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 
+/*
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var Redirect = require('react-router').Redirect;
+*/
 
-var LifeNotes = require('./LifeNotes');
+import LifeNotes from './LifeNotes';
 
 var NoMatch = React.createClass({
   render: function() {
@@ -17,13 +19,21 @@ var NoMatch = React.createClass({
 
 var mountNode = document.getElementById('section-life-notes');
 
+/*
 ReactDOM.render(
   (
     <Router>
-      <Route path="/trainings" component={LifeNotes} />
+      <Route path="trainings" component={LifeNotes} />
       <Redirect from="/" to="/trainings" />
       <Route path="*" component={NoMatch} />
     </Router>
   ),
   mountNode
 );
+*/
+
+console.log('test bufferx');
+ReactDOM.render(
+  <LifeNotes />,
+  mountNode
+)

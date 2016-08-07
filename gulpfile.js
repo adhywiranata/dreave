@@ -4,7 +4,7 @@ var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 
 gulp.task('bundle', function() {
-  return browserify('react_components/App0.js')
+  return browserify('react_components/App.js')
     .transform('babelify', {presets: 'react'})
     .bundle()
     .pipe(source('bundle.js'))
